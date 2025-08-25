@@ -46,5 +46,11 @@ class Task(models.Model):
     )
     assignees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="tasks")
 
+    class Meta:
+        ordering = [
+            "is_completed",
+            "-created_at",
+        ]
+
     def __str__(self) -> str:
         return self.name
