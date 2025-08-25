@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -44,7 +43,16 @@ class Task(models.Model):
     task_type = models.ForeignKey(
         TaskType, related_name="tasks", on_delete=models.CASCADE
     )
-    assignees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="tasks")
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name="created_tasks",
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    assignees = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="assigned_tasks"
+    )
 
     class Meta:
         ordering = [

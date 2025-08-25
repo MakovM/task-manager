@@ -6,6 +6,7 @@ from accounts.forms import SignUpForm
 
 User = get_user_model()
 
+
 class SignUpView(generic.CreateView):
     model = User
     form_class = SignUpForm

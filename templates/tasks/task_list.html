@@ -4,31 +4,31 @@
   <div class="tasks-container">
     {% if task_list %}
         {% for task in task_list %}
-          <div class="task-block">
-            <div class="task-header">
-              <h5>{{ task.name }}</h5>
-              <p class="badge priority-badge priority-{{ task.priority|lower }}">{{ task.priority }}</p>
-            </div>
+          <a href="{% url 'tasks:task-detail' pk=task.id %}" class="task-block">
+              <div class="task-header">
+                <h5>{{ task.name }}</h5>
+                <p class="badge priority-badge priority-{{ task.priority|lower }}">{{ task.priority }}</p>
+              </div>
 
-            <p class="task-desc">{{ task.description|truncatechars:90 }}</p>
+              <p class="task-desc">{{ task.description|truncatechars:90 }}</p>
 
-            <div class="task-meta">
-              <span class="badge {{ task.is_completed|yesno:'badge-success,badge-warning' }}">
-                {{ task.is_completed|yesno:"Done,In progress" }}
-              </span>
-              <span class="badge badge-info">{{ task.task_type.name }}</span>
-              {% for tag in task.tags.all %}
-                <span class="badge badge-secondary">#{{ tag.name }}</span>
-              {% endfor %}
-              <p class="mt-2"><small>Due: {{ task.deadline|date:"d M Y H:i" }}</small></p>
-              <p>
-                👤 {% for user in task.assignees.all %}
-                      {{ user.username }}{% if not forloop.last %}, {% endif %}
-                   {% empty %} No assignees
-                   {% endfor %}
-              </p>
-            </div>
-          </div>
+              <div class="task-meta">
+                <span class="badge {{ task.is_completed|yesno:'badge-success,badge-warning' }}">
+                  {{ task.is_completed|yesno:"Done,In progress" }}
+                </span>
+                <span class="badge badge-info">{{ task.task_type.name }}</span>
+                {% for tag in task.tags.all %}
+                  <span class="badge badge-secondary">#{{ tag.name }}</span>
+                {% endfor %}
+                <p class="mt-2"><small>Due: {{ task.deadline|date:"d M Y H:i" }}</small></p>
+                <p>
+                  👤 {% for user in task.assignees.all %}
+                        {{ user.username }}{% if not forloop.last %}, {% endif %}
+                     {% empty %} No assignees
+                     {% endfor %}
+                </p>
+              </div>
+          </a>
         {% endfor %}
     {% else %}
       <p class="empty-msg">There are no tasks</p>

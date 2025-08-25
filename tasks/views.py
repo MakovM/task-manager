@@ -29,5 +29,15 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         if my == "1":
             queryset = queryset.filter(assignees=self.request.user)
 
-
         return queryset
+
+
+class TaskDetailView(generic.DetailView):
+    model = Task
+    queryset = Task.objects.select_related(
+        "task_type",
+        "created_by"
+    ).prefetch_related(
+        "assignees",
+        "tags"
+    )
