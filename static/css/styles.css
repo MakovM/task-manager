@@ -17,12 +17,44 @@ body {
     height: 10%;
     z-index: 999;
     width: 100%;
+    padding-right: 30px;
     border-bottom: 1px solid silver;
     background-color: #fff;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
     font-weight: bold;
+}
+.logo {
+    width: 20%;
+    text-align: center;
+    margin: 0;
+    background: linear-gradient(135deg, #555555, #999999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-txt {
+    margin: 0;
+    font-weight: bold;
+    font-style: italic;
+}
+.user-username {
+    margin: 0;
+    text-align: center;
+    color: black;
+    padding: 0 10px;
+    align-content: center;
+}
+
+.user-block {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.user-username:hover {
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .sidebar {
@@ -175,9 +207,40 @@ body {
     color: black;
 }
 
-.sidebar-link:hover {
+.sidebar-link:hover, .sidebar-link.active {
     color: black;
     font-weight: bold;
     text-decoration: none;
 }
 
+.auth-container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f1f2f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-content {
+    background: white;
+    width: 30%;
+    min-height: 50vh;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-btn {
+    width: 100%;
+}
+
+.register-now-btn {
+    color: #495057;
+    font-size: 12px;
+    margin-top: 10px;
+}
