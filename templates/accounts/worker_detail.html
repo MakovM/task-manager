@@ -12,7 +12,7 @@
     </h1>
     <div class="manage-btn">
       {% if worker == user %}
-        <a href="" class="btn btn-dark">Change password</a>
+        <a href="{% url 'accounts:password-change' pk=worker.id %}" class="btn btn-dark">Change password</a>
         <a href="{% url 'accounts:worker-update' pk=worker.id %}" class="btn btn-dark">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
             <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
@@ -26,11 +26,8 @@
         </a>
       {% endif %}
       {% if user.is_staff and user != worker %}
-        <form action="" method="post" style="display:inline;">
-          {% csrf_token %}
-          <button class="btn btn-dark">Change position</button>
-        </form>
-        <form action="" method="post" style="display:inline;">
+        <a href="{% url 'accounts:position-change' pk=worker.id %}" class="btn btn-dark">Change position</a>
+        <form action="{% url 'accounts:status-change' pk=worker.id %}" method="post" style="display:inline;">
           {% csrf_token %}
           {% if worker.is_staff %}
             <button type="submit" class="btn btn-dark">Disqualify staff status</button>

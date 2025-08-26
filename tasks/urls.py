@@ -6,7 +6,7 @@ from tasks.views import (
     TaskCreateView,
     TaskUpdateView,
     TaskDeleteView,
-    TaskToggleView
+    TaskToggleView,
 )
 
 app_name = "tasks"
@@ -17,5 +17,5 @@ urlpatterns = [
     path("create/", TaskCreateView.as_view(), name="task-create"),
     path("<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"),
     path("<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"),
-    path("<int:pk>/toggle/", TaskToggleView.as_view(), name="task-toggle" ),
+    path("<int:pk>/toggle/", TaskToggleView.as_view(), name="task-toggle"),
 ]

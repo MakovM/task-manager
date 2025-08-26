@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
@@ -15,11 +15,8 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        queryset = Task.objects.select_related(
-            "task_type"
-        ).prefetch_related(
-            "assignees",
-            "tags"
+        queryset = Task.objects.select_related("task_type").prefetch_related(
+            "assignees", "tags"
         )
 
         comp = self.request.GET.get("comp")
@@ -57,7 +54,11 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+class TaskUpdateView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    generic.UpdateView
+):
     model = Task
     form_class = TaskForm
     template_name = "tasks/task_form.html"
@@ -67,17 +68,27 @@ class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
 
     def test_func(self):
         task = self.get_object()
-        return self.request.user == task.created_by or self.request.user.is_staff
+        return (
+                self.request.user == task.created_by
+                or self.request.user.is_staff
+        )
 
 
-class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class TaskDeleteView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    generic.DeleteView
+):
     model = Task
     template_name = "tasks/task_confirm_delete.html"
     success_url = reverse_lazy("tasks:task-list")
 
     def test_func(self):
         task = self.get_object()
-        return self.request.user == task.created_by or self.request.user.is_staff
+        return (
+                self.request.user == task.created_by
+                or self.request.user.is_staff
+        )
 
 
 class TaskToggleView(generic.View):
@@ -86,10 +97,12 @@ class TaskToggleView(generic.View):
         if (
             request.user == task.created_by
             or request.user.is_staff
-            or request.user  in task.assignees.all()
+            or request.user in task.assignees.all()
         ):
             task.is_completed = not task.is_completed
             task.save()
             return redirect("tasks:task-list")
 
-        return HttpResponseForbidden("You do not have permission to change this task status.")
+        return HttpResponseForbidden(
+            "You do not have permission to change this task status."
+        )

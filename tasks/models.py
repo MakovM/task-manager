@@ -36,9 +36,7 @@ class Task(models.Model):
     tags = models.ManyToManyField(Tag, related_name="tasks")
     created_at = models.DateTimeField(auto_now_add=True)
     priority = models.CharField(
-        max_length=10,
-        choices=Priority.choices,
-        default=Priority.MEDIUM
+        max_length=10, choices=Priority.choices, default=Priority.MEDIUM
     )
     task_type = models.ForeignKey(
         TaskType, related_name="tasks", on_delete=models.CASCADE
@@ -50,8 +48,7 @@ class Task(models.Model):
         null=True,
     )
     assignees = models.ManyToManyField(
-        settings.AUTH_USER_MODEL,
-        related_name="assigned_tasks"
+        settings.AUTH_USER_MODEL, related_name="assigned_tasks"
     )
 
     class Meta:

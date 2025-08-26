@@ -5,14 +5,13 @@ from tasks.models import Tag, Task
 
 User = get_user_model()
 
+
 class TaskForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
-        queryset=Tag.objects.all(),
-        widget=forms.CheckboxSelectMultiple
+        queryset=Tag.objects.all(), widget=forms.CheckboxSelectMultiple
     )
     assignees = forms.ModelMultipleChoiceField(
-        queryset=User.objects.all(),
-        widget=forms.CheckboxSelectMultiple
+        queryset=User.objects.all(), widget=forms.CheckboxSelectMultiple
     )
 
     deadline = forms.DateTimeField(

@@ -16,6 +16,7 @@ class SignUpForm(UserCreationForm):
             "last_name",
         )
 
+
 class WorkerUpdateForm(forms.ModelForm):
     class Meta:
         model = User
@@ -25,3 +26,8 @@ class WorkerUpdateForm(forms.ModelForm):
             "last_name",
         )
 
+
+class WorkerPositionChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("position",)
