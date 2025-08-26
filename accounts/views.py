@@ -138,3 +138,23 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "position_list"
     template_name = "accounts/position_list.html"
     paginate_by = 10
+
+
+class PositionCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Position
+    fields = ("name",)
+    template_name = "accounts/position_form.html"
+    success_url = reverse_lazy("accounts:position-list")
+
+
+class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Position
+    fields = ("name",)
+    template_name = "accounts/position_form.html"
+    success_url = reverse_lazy("accounts:position-list")
+
+
+class PositionDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Position
+    template_name = "accounts/position_confirm_delete.html"
+    success_url = reverse_lazy("accounts:position-list")
