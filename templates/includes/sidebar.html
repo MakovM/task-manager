@@ -1,4 +1,5 @@
 <div class="sidebar-content">
+  <a href="{% url 'tasks:task-create' %}" class="btn btn-dark task-create-btn">Create task</a>
   <h5>All tasks</h5>
   <ul class="nav-link">
     <li><a href="{% url 'tasks:task-list' %}?all=1" class="sidebar-link all {% if request.GET.all and not request.GET.my %}active{% endif %}">All</a></li>

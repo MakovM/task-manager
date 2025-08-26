@@ -1,7 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
+from tasks.forms import TaskForm
 from tasks.models import Task
 
 
@@ -32,7 +34,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         return queryset
 
 
-class TaskDetailView(generic.DetailView):
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
     queryset = Task.objects.select_related(
         "task_type",
@@ -41,3 +43,27 @@ class TaskDetailView(generic.DetailView):
         "assignees",
         "tags"
     )
+
+
+class TaskCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Task
+    form_class = TaskForm
+    template_name = "tasks/task_form.html"
+    success_url = reverse_lazy("tasks:task-list")
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
+
+class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = Task
+    form_class = TaskForm
+    template_name = "tasks/task_form.html"
+
+    def get_success_url(self):
+        return reverse("tasks:task-detail", kwargs={"pk": self.object.pk})
+
+    def test_func(self):
+        task = self.get_object()
+        return self.request.user == task.created_by or self.request.user.is_superuser
