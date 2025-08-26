@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from tasks.forms import TaskForm
+from tasks.forms import TaskForm, TagSearchForm
 from tasks.models import Task, Tag
 
 User = get_user_model()
@@ -128,6 +128,23 @@ class TagListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "tag_list"
     template_name = "tasks/tag_list.html"
     paginate_by = 10
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(TagListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+        context["search_form"] = TagSearchForm(
+            initial={"name": name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Tag.objects.all()
+        form = TagSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"]
+            )
+        return queryset
 
 
 class TagCreateView(LoginRequiredMixin, generic.CreateView):

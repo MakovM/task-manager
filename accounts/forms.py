@@ -31,3 +31,16 @@ class WorkerPositionChangeForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("position",)
+
+
+class PositionSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search positions..."
+            }
+        )
+    )

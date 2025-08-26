@@ -17,13 +17,11 @@ body {
     height: 10%;
     z-index: 999;
     width: 100%;
-    padding-right: 30px;
     border-bottom: 1px solid silver;
     background-color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 .logo {
     width: 20%;
@@ -32,6 +30,13 @@ body {
     background: linear-gradient(135deg, #555555, #999999);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+.header-additional {
+    width: 80%;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo-txt {

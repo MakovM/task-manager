@@ -1,4 +1,12 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block search %}
+  <form method="get" class="form-inline">
+    {{ search_form|crispy }}
+    <button type="submit" class="btn btn-dark">Search</button>
+  </form>
+{% endblock %}
 
 {% block content %}
   <div class="header-block">

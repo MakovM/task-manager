@@ -19,7 +19,9 @@
   <div class="logo">
     <p class="logo-txt">Task Manager</p>
   </div>
-    {% block header %}
+  <div class="header-additional">
+    {% block search %}
+
     {% endblock %}
     {% if user.is_authenticated %}
       <div class="user-block">
@@ -30,6 +32,7 @@
         </form>
       </div>
     {% endif %}
+  </div>
   </div>
 
   <div class="layout">
