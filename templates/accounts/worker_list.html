@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="tasks-container">
+    {% if worker_list %}
+        {% for worker in worker_list %}
+          <a href="{% url 'accounts:worker-detail' pk=worker.id %}" class="user-card">
+            <div class="">
+              <h4><strong>{{worker.username}} {% if worker == user  %} (Me) {% endif %}</strong></h4>
+              <p class=""><strong>Position:</strong> {{ worker.position }}</p>
+            </div>
+          <span class="btn btn-dark">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+          </span>
+          </a>
+        {% endfor %}
+    {% else %}
+      <p class="empty-msg">There are no Users</p>
+    {% endif %}
+  </div>
+{% endblock %}

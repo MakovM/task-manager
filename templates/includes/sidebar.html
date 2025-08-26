@@ -1,16 +1,16 @@
 <div class="sidebar-content">
   <a href="{% url 'tasks:task-create' %}" class="btn btn-dark task-create-btn">Create task</a>
-  <h5>All tasks</h5>
+  <a href="{% url 'tasks:task-list' %}" class="sidebar-header-link"><h5>All Tasks</h5></a>
   <ul class="nav-link">
-    <li><a href="{% url 'tasks:task-list' %}?all=1" class="sidebar-link all {% if request.GET.all and not request.GET.my %}active{% endif %}">All</a></li>
     <li><a href="{% url 'tasks:task-list' %}?comp=1" class="sidebar-link all {% if request.GET.comp == '1' and not request.GET.my %}active{% endif %}">Completed</a></li>
     <li><a href="{% url 'tasks:task-list' %}?comp=0" class="sidebar-link all {% if request.GET.comp == '0' and not request.GET.my %}active{% endif %}">Not completed</a></li>
   </ul>
 
-  <h5>My tasks</h5>
+  <a href="{% url 'tasks:task-list' %}?my=1" class="sidebar-header-link"><h5>My tasks</h5></a>
   <ul class="nav-link">
-    <li><a href="{% url 'tasks:task-list' %}?my=1" class="sidebar-link {% if request.GET.my == '1' and not request.GET.comp %}active{% endif %}">All</a></li>
     <li><a href="{% url 'tasks:task-list' %}?my=1&comp=1" class="sidebar-link {% if request.GET.my == '1' and request.GET.comp == '1' %}active{% endif %}">Completed</a></li>
     <li><a href="{% url 'tasks:task-list' %}?my=1&comp=0" class="sidebar-link {% if request.GET.my == '1' and request.GET.comp == '0' %}active{% endif %}">Not completed</a></li>
   </ul>
+  <a href="{% url 'accounts:worker-list' %}" class="sidebar-header-link"><h5>Workers</h5></a>
+
 </div>

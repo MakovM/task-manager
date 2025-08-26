@@ -67,7 +67,7 @@ class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
 
     def test_func(self):
         task = self.get_object()
-        return self.request.user == task.created_by or self.request.user.is_superuser
+        return self.request.user == task.created_by or self.request.user.is_staff
 
 
 class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
@@ -77,7 +77,7 @@ class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
 
     def test_func(self):
         task = self.get_object()
-        return self.request.user == task.created_by or self.request.user.is_superuser
+        return self.request.user == task.created_by or self.request.user.is_staff
 
 
 class TaskToggleView(generic.View):
@@ -85,7 +85,7 @@ class TaskToggleView(generic.View):
         task = get_object_or_404(Task, pk=pk)
         if (
             request.user == task.created_by
-            or request.user.is_superuser
+            or request.user.is_staff
             or request.user  in task.assignees.all()
         ):
             task.is_completed = not task.is_completed

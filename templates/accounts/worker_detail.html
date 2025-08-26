@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="task-detail">
+
+  <div class="task-header">
+    <h1>
+      {{ worker.username }}
+      {% if worker == user %}
+        (Me)
+      {% endif %}
+    </h1>
+  <hr>
+  <div class="task-info">
+    {% if worker.is_staff %}
+      <p><strong>STAFF</strong></p>
+    {% endif %}
+    {% if worker.first_name %}
+      <p><strong>First name</strong> {{ worker.first_name }}</p>
+    {% endif %}
+    {% if worker.last_name %}
+      <p><strong>Last name</strong> {{ worker.last_name }}</p>
+    {% endif %}
+    <p><strong>Position:</strong> {{ worker.position }}</p>
+    <p><strong>Email:</strong> {{ worker.email }}</p>
+    <p><strong>Date joined:</strong> {{ worker.date_joined|date:"Y-m-d H:i" }}</p>
+    <p><strong>Last login:</strong> {{ worker.last_login|date:"Y-m-d H:i" }}</p>
+
+  </div></div></div>
+{% endblock %}

@@ -6,7 +6,7 @@
   <div class="task-header">
     <h1>{{ task.name }}</h1>
     <div class="manage-btn">
-      {% if user.is_superuser or user == task.created_by %}
+      {% if user.is_staff or user == task.created_by %}
         <a href="{% url 'tasks:task-update' pk=task.id %}" class="btn btn-dark">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
             <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
@@ -19,7 +19,7 @@
           </svg>
         </a>
       {% endif %}
-      {% if user.is_superuser or user == task.created_by or user in task.assignees.all %}
+      {% if user.is_staff or user == task.created_by or user in task.assignees.all %}
         <form action="{% url 'tasks:task-toggle' pk=task.id %}" method="post" style="display:inline;">
           {% csrf_token %}
           {% if task.is_completed %}
