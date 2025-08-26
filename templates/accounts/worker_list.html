@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
+{% block title %}
+  <title>All Workers</title>
+{% endblock %}
+
 {% block search %}
   <form method="get" class="form-inline">
     {{ search_form|crispy }}

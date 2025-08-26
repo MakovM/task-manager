@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
+{% block title %}
+  <title>{{ worker.username }}</title>
+{% endblock %}
+
 {% block content %}
 <div class="task-detail">
-
   <div class="task-header">
     <h1>
       {{ worker.username }}
@@ -55,5 +58,6 @@
     <p><strong>Date joined:</strong> {{ worker.date_joined|date:"Y-m-d H:i" }}</p>
     <p><strong>Last login:</strong> {{ worker.last_login|date:"Y-m-d H:i" }}</p>
 
+  </div>
 </div>
 {% endblock %}

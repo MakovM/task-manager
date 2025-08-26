@@ -41,7 +41,7 @@ body {
 
 .logo-txt {
     margin: 0;
-    font-weight: bold;
+    font-weight: bolder;
     font-style: italic;
 }
 .user-username {
@@ -116,6 +116,7 @@ body {
     color: black;
     font-weight: bold;
 }
+
 .user-card,
 .tag-card,
 .position-card,
@@ -125,7 +126,8 @@ body {
     align-items: center;
 }
 
-.task-block:hover, .user-card:hover {
+.task-block:hover,
+.user-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     text-decoration: none;
@@ -214,6 +216,7 @@ body {
     background-color: #495057;
     color: #fff;
 }
+
 .page-item.active .page-link {
     border-color: white;
 }
@@ -291,6 +294,11 @@ body {
     align-items: center;
 }
 
+.register-btn {
+    text-align: center;
+    width: 100%;
+}
+
 .login-btn {
     width: 100%;
 }
@@ -300,4 +308,3 @@ body {
     font-size: 12px;
     margin-top: 10px;
 }
-
