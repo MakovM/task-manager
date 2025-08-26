@@ -33,14 +33,18 @@ class WorkerPositionChangeForm(forms.ModelForm):
         fields = ("position",)
 
 
+class WorkerSearchForm(forms.Form):
+    username = forms.CharField(
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Worker username..."}),
+    )
+
+
 class PositionSearchForm(forms.Form):
     name = forms.CharField(
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Search positions..."
-            }
-        )
+        widget=forms.TextInput(attrs={"placeholder": "Search positions..."}),
     )

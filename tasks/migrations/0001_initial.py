@@ -87,8 +87,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "tags",
-                    models.ManyToManyField(
+                    "tags", models.ManyToManyField(
                         related_name="tasks",
                         to="tasks.tag"
                     )

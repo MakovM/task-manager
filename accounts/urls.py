@@ -11,7 +11,7 @@ from accounts.views import (
     PositionListView,
     PositionCreateView,
     PositionUpdateView,
-    PositionDeleteView
+    PositionDeleteView,
 )
 
 app_name = "accounts"
@@ -50,11 +50,7 @@ urlpatterns = [
         WorkerStatusChangeView.as_view(),
         name="status-change",
     ),
-    path(
-        "positions/",
-        PositionListView.as_view(),
-        name="position-list"
-    ),
+    path("positions/", PositionListView.as_view(), name="position-list"),
     path(
         "positions/create/",
         PositionCreateView.as_view(),
@@ -63,12 +59,11 @@ urlpatterns = [
     path(
         "positions/<int:pk>/update/",
         PositionUpdateView.as_view(),
-        name="position-update"
+        name="position-update",
     ),
     path(
         "positions/<int:pk>/delete/",
         PositionDeleteView.as_view(),
-        name="position-delete"
+        name="position-delete",
     ),
-
 ]

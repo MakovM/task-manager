@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from tasks.forms import TaskForm, TagSearchForm
+from tasks.forms import TaskForm, TagSearchForm, TaskSearchForm
 from tasks.models import Task, Tag
 
 User = get_user_model()
@@ -16,6 +16,12 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "task_list"
     template_name = "tasks/task_list.html"
     paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(TaskListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+        context["search_form"] = TaskSearchForm(initial={"name": name})
+        return context
 
     def get_queryset(self):
         queryset = Task.objects.select_related("task_type").prefetch_related(
@@ -32,6 +38,10 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         if my == "1":
             queryset = queryset.filter(assignees=self.request.user)
 
+        form = TaskSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
+
         return queryset
 
 
@@ -41,8 +51,7 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
         "task_type",
         "created_by"
     ).prefetch_related(
-        "assignees",
-        "tags"
+        "assignees", "tags"
     )
 
 
@@ -132,18 +141,14 @@ class TagListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TagListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
-        context["search_form"] = TagSearchForm(
-            initial={"name": name}
-        )
+        context["search_form"] = TagSearchForm(initial={"name": name})
         return context
 
     def get_queryset(self):
         queryset = Tag.objects.all()
         form = TagSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(
-                name__icontains=form.cleaned_data["name"]
-            )
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
         return queryset
 
 

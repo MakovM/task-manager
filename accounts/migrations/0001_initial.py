@@ -48,7 +48,10 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "password",
-                    models.CharField(max_length=128, verbose_name="password")
+                    models.CharField(
+                        max_length=128,
+                        verbose_name="password"
+                    )
                 ),
                 (
                     "last_login",
@@ -70,8 +73,8 @@ class Migration(migrations.Migration):
                     "username",
                     models.CharField(
                         error_messages={
-                            "unique": "A user with that " "username "
-                                      "already exists."
+                            "unique": "A user with that " ""
+                                      "username " "already exists."
                         },
                         help_text="Required. 150 characters or fewer. "
                         "Letters, digits and @/./+/-/_ only.",

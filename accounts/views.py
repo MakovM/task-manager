@@ -9,7 +9,9 @@ from django.views import generic
 from accounts.forms import (
     SignUpForm,
     WorkerUpdateForm,
-    WorkerPositionChangeForm, PositionSearchForm
+    WorkerPositionChangeForm,
+    PositionSearchForm,
+    WorkerSearchForm,
 )
 from accounts.models import Position
 
@@ -27,8 +29,26 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = User
     context_object_name = "worker_list"
     template_name = "accounts/worker_list.html"
-    queryset = User.objects.select_related("position")
     paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(WorkerListView, self).get_context_data(**kwargs)
+        username = self.request.GET.get("username", "")
+        context["search_form"] = WorkerSearchForm(
+            initial={"username": username}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = User.objects.select_related("position")
+
+        form = WorkerSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(
+                username__icontains=form.cleaned_data["username"]
+            )
+
+        return queryset
 
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
@@ -93,9 +113,7 @@ class WorkerPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
 
 class WorkerPositionChangeView(
-    LoginRequiredMixin,
-    UserPassesTestMixin,
-    generic.UpdateView
+    LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
 ):
     model = User
     form_class = WorkerPositionChangeForm
@@ -110,7 +128,8 @@ class WorkerPositionChangeView(
 
     def get_success_url(self):
         return reverse_lazy(
-            "accounts:worker-detail", kwargs={"pk": self.object.pk}
+            "accounts:worker-detail",
+            kwargs={"pk": self.object.pk}
         )
 
     def test_func(self):
@@ -142,18 +161,14 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PositionListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
-        context["search_form"] = PositionSearchForm(
-            initial={"name": name}
-        )
+        context["search_form"] = PositionSearchForm(initial={"name": name})
         return context
 
     def get_queryset(self):
         queryset = Position.objects.all()
         form = PositionSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(
-                name__icontains=form.cleaned_data["name"]
-            )
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
         return queryset
 
 
