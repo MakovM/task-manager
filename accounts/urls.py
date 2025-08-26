@@ -8,6 +8,7 @@ from accounts.views import (
     WorkerPasswordChangeView,
     WorkerPositionChangeView,
     WorkerStatusChangeView,
+    PositionListView
 )
 
 app_name = "accounts"
@@ -46,4 +47,6 @@ urlpatterns = [
         WorkerStatusChangeView.as_view(),
         name="status-change",
     ),
+    path("positions/", PositionListView.as_view(), name="position-list"),
+
 ]

@@ -12,5 +12,6 @@
     <li><a href="{% url 'tasks:task-list' %}?my=1&comp=0" class="sidebar-link {% if request.GET.my == '1' and request.GET.comp == '0' %}active{% endif %}">Not completed</a></li>
   </ul>
   <a href="{% url 'accounts:worker-list' %}" class="sidebar-header-link"><h5>Workers</h5></a>
-
+  <a href="{% url 'tasks:tag-list' %}" class="sidebar-header-link"><h5>Tags</h5></a>
+  <a href="{% url 'accounts:position-list' %}" class="sidebar-header-link"><h5>Positions</h5></a>
 </div>

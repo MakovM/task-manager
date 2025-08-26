@@ -6,8 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 from tasks.forms import TaskForm
-from tasks.models import Task
-
+from tasks.models import Task, Tag
 
 User = get_user_model()
 
@@ -122,3 +121,10 @@ class TaskToggleView(generic.View):
         return HttpResponseForbidden(
             "You do not have permission to change this task status."
         )
+
+
+class TagListView(LoginRequiredMixin, generic.ListView):
+    model = Tag
+    context_object_name = "tag_list"
+    template_name = "tasks/tag_list.html"
+    paginate_by = 10

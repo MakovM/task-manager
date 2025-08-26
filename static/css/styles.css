@@ -83,7 +83,12 @@ body {
     gap: 20px;
 }
 
-.task-block, .task-detail, .create-update-form, .user-card  {
+.task-block,
+.task-detail,
+.create-update-form,
+.user-card,
+.tag-card,
+.position-card {
     background-color: #fff;
     color: black;
     width: 100%;
@@ -106,10 +111,13 @@ body {
     color: black;
     font-weight: bold;
 }
-.user-card {
+.user-card,
+.tag-card,
+.position-card {
     display: flex;
     justify-content: space-between;
-    align-items: center;}
+    align-items: center;
+}
 
 .task-block:hover, .user-card:hover {
     transform: translateY(-3px);
@@ -220,7 +228,7 @@ body {
 }
 
 .sidebar-header-link h5 {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     background-color: #f1f2f4;
     width: 100%;

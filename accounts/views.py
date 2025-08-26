@@ -11,6 +11,7 @@ from accounts.forms import (
     WorkerUpdateForm,
     WorkerPositionChangeForm
 )
+from accounts.models import Position
 
 User = get_user_model()
 
@@ -130,3 +131,10 @@ class WorkerStatusChangeView(generic.View):
         return HttpResponseForbidden(
             "You do not have permission to change User status."
         )
+
+
+class PositionListView(LoginRequiredMixin, generic.ListView):
+    model = Position
+    context_object_name = "position_list"
+    template_name = "accounts/position_list.html"
+    paginate_by = 10
