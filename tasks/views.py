@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
@@ -67,3 +68,28 @@ class TaskUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
     def test_func(self):
         task = self.get_object()
         return self.request.user == task.created_by or self.request.user.is_superuser
+
+
+class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = Task
+    template_name = "tasks/task_confirm_delete.html"
+    success_url = reverse_lazy("tasks:task-list")
+
+    def test_func(self):
+        task = self.get_object()
+        return self.request.user == task.created_by or self.request.user.is_superuser
+
+
+class TaskToggleView(generic.View):
+    def post(self, request: HttpRequest, pk: int) -> HttpResponse:
+        task = get_object_or_404(Task, pk=pk)
+        if (
+            request.user == task.created_by
+            or request.user.is_superuser
+            or request.user  in task.assignees.all()
+        ):
+            task.is_completed = not task.is_completed
+            task.save()
+            return redirect("tasks:task-list")
+
+        return HttpResponseForbidden("You do not have permission to change this task status.")
