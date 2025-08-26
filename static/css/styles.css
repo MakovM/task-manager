@@ -96,6 +96,16 @@ body {
 .task-detail ul {
     list-style: none;
 }
+
+.user-link{
+    color: black;
+}
+
+.user-link:hover {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
 .user-card {
     display: flex;
     justify-content: space-between;

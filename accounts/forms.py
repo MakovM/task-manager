@@ -15,3 +15,13 @@ class SignUpForm(UserCreationForm):
             "first_name",
             "last_name",
         )
+
+class WorkerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+        )
+

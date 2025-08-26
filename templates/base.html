@@ -23,7 +23,7 @@
     {% endblock %}
     {% if user.is_authenticated %}
       <div class="user-block">
-        <p class="user-username">{{ user.username }}</p>
+        <a href="{% url 'accounts:worker-detail' pk=user.id %}" class="user-username">{{ user.username }}</a>
         <form action="{% url 'accounts:logout' %}" method="post">
           {% csrf_token %}
           <input type="submit" class="btn btn-dark" value="Logout">

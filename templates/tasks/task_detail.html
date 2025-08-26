@@ -59,7 +59,7 @@
     <p><strong>Assignees:</strong>
       <ul>
         {% for user in task.assignees.all %}
-          <li>👤 {{ user.username }}</li>
+          <a href="{% url 'accounts:worker-detail' pk=user.id %}" class="user-link"><li>👤 {{ user.username }}</li></a>
         {% endfor %}
       </ul>
     </p>
