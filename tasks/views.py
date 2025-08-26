@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
@@ -6,6 +7,9 @@ from django.views import generic
 
 from tasks.forms import TaskForm
 from tasks.models import Task
+
+
+User = get_user_model()
 
 
 class TaskListView(LoginRequiredMixin, generic.ListView):
@@ -62,6 +66,12 @@ class TaskUpdateView(
     model = Task
     form_class = TaskForm
     template_name = "tasks/task_form.html"
+    _cached_object = None
+
+    def get_object(self, queryset=None):
+        if self._cached_object is None:
+            self._cached_object = super().get_object(queryset)
+        return self._cached_object
 
     def get_success_url(self):
         return reverse("tasks:task-detail", kwargs={"pk": self.object.pk})
@@ -82,6 +92,12 @@ class TaskDeleteView(
     model = Task
     template_name = "tasks/task_confirm_delete.html"
     success_url = reverse_lazy("tasks:task-list")
+    _cached_object = None
+
+    def get_object(self, queryset=None):
+        if self._cached_object is None:
+            self._cached_object = super().get_object(queryset)
+        return self._cached_object
 
     def test_func(self):
         task = self.get_object()

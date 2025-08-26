@@ -86,7 +86,13 @@ class Migration(migrations.Migration):
                         related_name="tasks", to=settings.AUTH_USER_MODEL
                     ),
                 ),
-                ("tags", models.ManyToManyField(related_name="tasks", to="tasks.tag")),
+                (
+                    "tags",
+                    models.ManyToManyField(
+                        related_name="tasks",
+                        to="tasks.tag"
+                    )
+                ),
                 (
                     "task_type",
                     models.ForeignKey(

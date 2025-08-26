@@ -18,4 +18,4 @@ class Worker(AbstractUser):
     )
 
     def __str__(self) -> str:
-        return f"{self.username} ({self.position})"
+        return self.username

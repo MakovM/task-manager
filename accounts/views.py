@@ -43,6 +43,13 @@ class WorkerUpdateView(
     model = User
     form_class = WorkerUpdateForm
     template_name = "accounts/worker_form.html"
+    queryset = User.objects.select_related("position")
+    _cached_object = None
+
+    def get_object(self, queryset=None):
+        if self._cached_object is None:
+            self._cached_object = super().get_object(queryset)
+        return self._cached_object
 
     def get_success_url(self):
         return reverse_lazy(
@@ -62,6 +69,13 @@ class WorkerDeleteView(
     model = User
     template_name = "accounts/worker_confirm_delete.html"
     success_url = reverse_lazy("accounts:login")
+    queryset = User.objects.select_related("position")
+    _cached_object = None
+
+    def get_object(self, queryset=None):
+        if self._cached_object is None:
+            self._cached_object = super().get_object(queryset)
+        return self._cached_object
 
     def test_func(self):
         return self.request.user == self.get_object()
@@ -78,11 +92,20 @@ class WorkerPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
 
 class WorkerPositionChangeView(
-    LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    generic.UpdateView
 ):
     model = User
     form_class = WorkerPositionChangeForm
     template_name = "accounts/worker_form.html"
+    queryset = User.objects.select_related("position")
+    _cached_object = None
+
+    def get_object(self, queryset=None):
+        if self._cached_object is None:
+            self._cached_object = super().get_object(queryset)
+        return self._cached_object
 
     def get_success_url(self):
         return reverse_lazy(
