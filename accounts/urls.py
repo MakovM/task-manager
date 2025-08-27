@@ -17,8 +17,8 @@ from accounts.views import (
 app_name = "accounts"
 
 urlpatterns = [
-    path("accounts/", include("django.contrib.auth.urls")),
-    path("accounts/signup/", SignUpView.as_view(), name="sign-up"),
+    path("", include("django.contrib.auth.urls")),
+    path("signup/", SignUpView.as_view(), name="sign-up"),
     path("workers/", WorkerListView.as_view(), name="worker-list"),
     path(
         "workers/<int:pk>/",
@@ -50,19 +50,19 @@ urlpatterns = [
         WorkerStatusChangeView.as_view(),
         name="status-change",
     ),
-    path("positions/", PositionListView.as_view(), name="position-list"),
+    path("workers/positions/", PositionListView.as_view(), name="position-list"),
     path(
-        "positions/create/",
+        "workers/positions/create/",
         PositionCreateView.as_view(),
         name="position-create"
     ),
     path(
-        "positions/<int:pk>/update/",
+        "workers/positions/<int:pk>/update/",
         PositionUpdateView.as_view(),
         name="position-update",
     ),
     path(
-        "positions/<int:pk>/delete/",
+        "workers/positions/<int:pk>/delete/",
         PositionDeleteView.as_view(),
         name="position-delete",
     ),

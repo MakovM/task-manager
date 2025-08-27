@@ -1,12 +1,16 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-bzf77z)z^c)3y2p=b9(c75@e2z#a-(rpvfm1h$@4shc%hf)ck%'
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    'django-insecure-bzf77z)z^c)3y2p=b9(c75@e2z#a-(rpvfm1h$@4shc%hf)ck%'
+)
 
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -102,4 +106,4 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-LOGIN_REDIRECT_URL = "/task/"
+LOGIN_REDIRECT_URL = "/"
