@@ -18,7 +18,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(TaskListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
         context["search_form"] = TaskSearchForm(initial={"name": name})
         return context
@@ -76,9 +76,9 @@ class TaskUpdateView(
     template_name = "tasks/task_form.html"
     _cached_object = None
 
-    def get_object(self, queryset=None):
+    def get_object(self):
         if self._cached_object is None:
-            self._cached_object = super().get_object(queryset)
+            self._cached_object = super().get_object()
         return self._cached_object
 
     def get_success_url(self):
@@ -102,9 +102,9 @@ class TaskDeleteView(
     success_url = reverse_lazy("tasks:task-list")
     _cached_object = None
 
-    def get_object(self, queryset=None):
+    def get_object(self):
         if self._cached_object is None:
-            self._cached_object = super().get_object(queryset)
+            self._cached_object = super().get_object()
         return self._cached_object
 
     def test_func(self):
@@ -139,7 +139,7 @@ class TagListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(TagListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
         context["search_form"] = TagSearchForm(initial={"name": name})
         return context
