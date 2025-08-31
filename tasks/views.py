@@ -118,10 +118,13 @@ class TaskDeleteView(
 class TaskToggleView(generic.View):
     def post(self, request: HttpRequest, pk: int) -> HttpResponse:
         task = get_object_or_404(Task, pk=pk)
+
+        is_assignee = task.assignees.filter(id=request.user.id).exists()
+
         if (
             request.user == task.created_by
             or request.user.is_staff
-            or request.user in task.assignees.all()
+            or is_assignee
         ):
             task.is_completed = not task.is_completed
             task.save()
