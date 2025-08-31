@@ -2,6 +2,19 @@ from django.conf import settings
 from django.db import models
 
 
+class CreatedInfoMixin(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name="created_tasks",
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+
+    class Meta:
+        abstract = True
+
+
 class TaskType(models.Model):
     name = models.CharField(max_length=255)
 
@@ -22,7 +35,7 @@ class Tag(models.Model):
         return self.name
 
 
-class Task(models.Model):
+class Task(CreatedInfoMixin):
     class Priority(models.TextChoices):
         URGENT = "Urgent", "Urgent"
         HIGH = "High", "High"
@@ -34,18 +47,11 @@ class Task(models.Model):
     deadline = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag, related_name="tasks")
-    created_at = models.DateTimeField(auto_now_add=True)
     priority = models.CharField(
         max_length=10, choices=Priority.choices, default=Priority.MEDIUM
     )
     task_type = models.ForeignKey(
         TaskType, related_name="tasks", on_delete=models.CASCADE
-    )
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name="created_tasks",
-        on_delete=models.SET_NULL,
-        null=True,
     )
     assignees = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="assigned_tasks"
