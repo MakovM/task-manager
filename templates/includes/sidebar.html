@@ -2,14 +2,14 @@
   <a href="{% url 'tasks:task-create' %}" class="btn btn-dark task-create-btn">Create task</a>
   <a href="{% url 'tasks:task-list' %}" class="sidebar-header-link"><h5>All Tasks</h5></a>
   <ul class="nav-link">
-    <li><a href="{% url 'tasks:task-list' %}?comp=1" class="sidebar-link all {% if request.GET.comp == '1' and not request.GET.my %}active{% endif %}">Completed</a></li>
-    <li><a href="{% url 'tasks:task-list' %}?comp=0" class="sidebar-link all {% if request.GET.comp == '0' and not request.GET.my %}active{% endif %}">Not completed</a></li>
+    <li><a href="{% url 'tasks:task-list' %}?scope=all&status=closed" class="sidebar-link all {% if request.GET.status == 'closed' and request.GET.scope == 'all' %}active{% endif %}">Completed</a></li>
+    <li><a href="{% url 'tasks:task-list' %}?scope=all&status=open" class="sidebar-link all {% if request.GET.status == 'open' and request.GET.scope == 'all' %}active{% endif %}">Not completed</a></li>
   </ul>
 
-  <a href="{% url 'tasks:task-list' %}?my=1" class="sidebar-header-link"><h5>My tasks</h5></a>
+  <a href="{% url 'tasks:task-list' %}?scope=my" class="sidebar-header-link"><h5>My tasks</h5></a>
   <ul class="nav-link">
-    <li><a href="{% url 'tasks:task-list' %}?my=1&comp=1" class="sidebar-link {% if request.GET.my == '1' and request.GET.comp == '1' %}active{% endif %}">Completed</a></li>
-    <li><a href="{% url 'tasks:task-list' %}?my=1&comp=0" class="sidebar-link {% if request.GET.my == '1' and request.GET.comp == '0' %}active{% endif %}">Not completed</a></li>
+    <li><a href="{% url 'tasks:task-list' %}?scope=my&status=closed" class="sidebar-link {% if request.GET.scope == 'my' and request.GET.status == 'closed' %}active{% endif %}">Completed</a></li>
+    <li><a href="{% url 'tasks:task-list' %}?scope=my&status=open" class="sidebar-link {% if request.GET.scope == 'my' and request.GET.status == 'open' %}active{% endif %}">Not completed</a></li>
   </ul>
   <a href="{% url 'accounts:worker-list' %}" class="sidebar-header-link"><h5>Workers</h5></a>
   <a href="{% url 'tasks:tag-list' %}" class="sidebar-header-link"><h5>Tags</h5></a>

@@ -28,15 +28,15 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
             "assignees", "tags"
         )
 
-        comp = self.request.GET.get("comp")
-        if comp == "1":
-            queryset = queryset.filter(is_completed=True)
-        elif comp == "0":
-            queryset = queryset.filter(is_completed=False)
-
-        my = self.request.GET.get("my")
-        if my == "1":
+        scope = self.request.GET.get("scope")
+        if scope == "my":
             queryset = queryset.filter(assignees=self.request.user)
+
+        status = self.request.GET.get("status")
+        if status == "closed":
+            queryset = queryset.filter(is_completed=True)
+        elif status == "open":
+            queryset = queryset.filter(is_completed=False)
 
         form = TaskSearchForm(self.request.GET)
         if form.is_valid():
