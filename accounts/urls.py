@@ -50,7 +50,11 @@ urlpatterns = [
         WorkerStatusChangeView.as_view(),
         name="status-change",
     ),
-    path("workers/positions/", PositionListView.as_view(), name="position-list"),
+    path(
+        "workers/positions/",
+        PositionListView.as_view(),
+        name="position-list"
+    ),
     path(
         "workers/positions/create/",
         PositionCreateView.as_view(),

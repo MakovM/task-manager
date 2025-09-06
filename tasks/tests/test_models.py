@@ -15,9 +15,8 @@ class TaskModelTests(TestCase):
             username="testuser",
             password="Testpass123"
         )
-        self.task_type  =TaskType.objects.create(name="Bug Fix")
+        self.task_type = TaskType.objects.create(name="Bug Fix")
         self.deadline = timezone.now() + timedelta(days=7)
-
 
     def test_task_creation_and_string_representation(self):
         task = Task.objects.create(
@@ -72,6 +71,7 @@ class TaskModelTests(TestCase):
         self.assertIn(tag1, task.tags.all())
         self.assertIn(tag2, task.tags.all())
         self.assertIn(task, tag1.tasks.all())
+
 
 class TaskTypeModelTests(TestCase):
     def test_task_type_creation_and_str(self):
