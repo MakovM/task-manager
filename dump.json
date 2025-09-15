@@ -1,0 +1,324 @@
+[
+{
+    "model": "accounts.position",
+    "pk": 1,
+    "fields": {
+        "name": "Developer"
+    }
+},
+{
+    "model": "accounts.position",
+    "pk": 2,
+    "fields": {
+        "name": "Project Manager"
+    }
+},
+{
+    "model": "accounts.position",
+    "pk": 3,
+    "fields": {
+        "name": "QA"
+    }
+},
+{
+    "model": "accounts.position",
+    "pk": 4,
+    "fields": {
+        "name": "Designer"
+    }
+},
+{
+    "model": "accounts.position",
+    "pk": 5,
+    "fields": {
+        "name": "DevOps"
+    }
+},
+{
+    "model": "accounts.worker",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$lpinJTZ0kMKwcSXkshZGN9$SbvuYqJjcYLVCZ8FQYb/ycuAuPpzvC5QLAeekDDF20U=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "alice",
+        "first_name": "Alice",
+        "last_name": "Tkachenko",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-08-26T22:53:10.135Z",
+        "position": 1,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.worker",
+    "pk": 8,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$n66IwuKPbWbp84OTB5RO02$/5hJh0lrYdtUsP72ZVPRoytmTJ8U+zrfEVlVfPswHY8=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "bob",
+        "first_name": "Bob",
+        "last_name": "Marley",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-26T22:53:49.109Z",
+        "position": 4,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.worker",
+    "pk": 9,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$61SSI4OadoXZO7a3BZqzEE$IYprtKSpTKrsTp+mfDehQjeczQ5GdGwbmAxDsw85iYE=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "charlie",
+        "first_name": "Charlie",
+        "last_name": "Kox",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-26T22:54:37.169Z",
+        "position": 3,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.worker",
+    "pk": 10,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$huxRw7HD61gDZxfaj4Cqna$b1Gj7PzqbQm2fXQUt95yJhMoCpMajt30tE/DdjbLVRk=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "diana",
+        "first_name": "Diana",
+        "last_name": "Black",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-26T22:55:35.121Z",
+        "position": 2,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.worker",
+    "pk": 11,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$YqTZiZlhzneVmqr4oFgdbd$9EQSBluppOlkyTF49AVXS7zXmgc4BBUPKEcppxHBMOo=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "eric",
+        "first_name": "Eric",
+        "last_name": "Clapton",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-26T22:56:10.705Z",
+        "position": 5,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.worker",
+    "pk": 12,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$91gwFxzEAlaKGllGUI7ju7$+YpChWC4TS6N6yIFjNjqbD27Kv45HwpGKoIWssxK2q8=",
+        "last_login": "2025-08-27T14:41:37.652Z",
+        "is_superuser": true,
+        "username": "user",
+        "first_name": "",
+        "last_name": "",
+        "email": "user@admin.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-08-27T14:40:23.606Z",
+        "position": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "tasks.tasktype",
+    "pk": 6,
+    "fields": {
+        "name": "Bug Fix"
+    }
+},
+{
+    "model": "tasks.tasktype",
+    "pk": 7,
+    "fields": {
+        "name": "Feature"
+    }
+},
+{
+    "model": "tasks.tasktype",
+    "pk": 8,
+    "fields": {
+        "name": "Development"
+    }
+},
+{
+    "model": "tasks.tasktype",
+    "pk": 9,
+    "fields": {
+        "name": "Maintenance"
+    }
+},
+{
+    "model": "tasks.tag",
+    "pk": 4,
+    "fields": {
+        "name": "Urgent"
+    }
+},
+{
+    "model": "tasks.tag",
+    "pk": 5,
+    "fields": {
+        "name": "Frontend"
+    }
+},
+{
+    "model": "tasks.tag",
+    "pk": 6,
+    "fields": {
+        "name": "Backend"
+    }
+},
+{
+    "model": "tasks.tag",
+    "pk": 7,
+    "fields": {
+        "name": "API"
+    }
+},
+{
+    "model": "tasks.tag",
+    "pk": 8,
+    "fields": {
+        "name": "Database"
+    }
+},
+{
+    "model": "tasks.task",
+    "pk": 10,
+    "fields": {
+        "name": "Fix login bug",
+        "description": "Users cannot log in after the last update.",
+        "deadline": "2025-08-29T22:57:46Z",
+        "is_completed": false,
+        "created_at": "2025-08-26T22:58:50.478Z",
+        "priority": "High",
+        "task_type": 6,
+        "created_by": 7,
+        "tags": [
+            6,
+            4
+        ],
+        "assignees": [
+            7,
+            9
+        ]
+    }
+},
+{
+    "model": "tasks.task",
+    "pk": 11,
+    "fields": {
+        "name": "Update profile page",
+        "description": "Redesign profile page and add new fields.",
+        "deadline": "2025-08-31T22:59:08Z",
+        "is_completed": true,
+        "created_at": "2025-08-26T23:00:17.062Z",
+        "priority": "Medium",
+        "task_type": 7,
+        "created_by": 8,
+        "tags": [
+            7,
+            5
+        ],
+        "assignees": [
+            8,
+            10
+        ]
+    }
+},
+{
+    "model": "tasks.task",
+    "pk": 12,
+    "fields": {
+        "name": "Write unit tests",
+        "description": "Cover all Task model methods with tests.",
+        "deadline": "2025-09-02T23:00:32Z",
+        "is_completed": false,
+        "created_at": "2025-08-26T23:01:22.335Z",
+        "priority": "High",
+        "task_type": 8,
+        "created_by": 9,
+        "tags": [
+            7,
+            6
+        ],
+        "assignees": [
+            7,
+            9
+        ]
+    }
+},
+{
+    "model": "tasks.task",
+    "pk": 13,
+    "fields": {
+        "name": "Implement search feature",
+        "description": "Add search for tasks, workers, tags, and positions.",
+        "deadline": "2025-09-05T23:02:03Z",
+        "is_completed": false,
+        "created_at": "2025-08-26T23:02:12.835Z",
+        "priority": "Medium",
+        "task_type": 7,
+        "created_by": 10,
+        "tags": [
+            6,
+            5
+        ],
+        "assignees": [
+            10,
+            11
+        ]
+    }
+},
+{
+    "model": "tasks.task",
+    "pk": 14,
+    "fields": {
+        "name": "Optimize database queries",
+        "description": "Reduce duplicate queries and improve task listing speed.",
+        "deadline": "2025-08-30T23:02:23Z",
+        "is_completed": false,
+        "created_at": "2025-08-26T23:02:59.684Z",
+        "priority": "Urgent",
+        "task_type": 9,
+        "created_by": 11,
+        "tags": [
+            6,
+            8
+        ],
+        "assignees": [
+            7,
+            11
+        ]
+    }
+}
+]

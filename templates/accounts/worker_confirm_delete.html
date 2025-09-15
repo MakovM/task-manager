@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Delete worker</title>
+{% endblock %}
+
+{% block content %}
+  <h1>Are you sure you want to delete your account?</h1>
+  <form action="" method="post">
+  {% csrf_token %}
+    <input type="submit" value="Yes, delete" class="btn btn-danger">
+    <a href="{% url 'accounts:worker-detail' pk=worker.id %}" class="btn btn-light">Cancel</a>
+  </form>
+{% endblock %}

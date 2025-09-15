@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>{{ worker.username }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="task-detail">
+  <div class="task-header">
+    <h1>
+      {{ worker.username }}
+      {% if worker == user %}
+        (Me)
+      {% endif %}
+    </h1>
+    <div class="manage-btn">
+      {% if worker == user %}
+        <a href="{% url 'accounts:password-change' pk=worker.id %}" class="btn btn-dark">Change password</a>
+        <a href="{% url 'accounts:worker-update' pk=worker.id %}" class="btn btn-dark">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
+            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
+          </svg>
+        </a>
+        <a href="{% url 'accounts:worker-delete' pk=worker.id %}" class="btn btn-dark">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+          </svg>
+        </a>
+      {% endif %}
+      {% if user.is_staff and user != worker %}
+        <a href="{% url 'accounts:position-change' pk=worker.id %}" class="btn btn-dark">Change position</a>
+        <form action="{% url 'accounts:status-change' pk=worker.id %}" method="post" style="display:inline;">
+          {% csrf_token %}
+          {% if worker.is_staff %}
+            <button type="submit" class="btn btn-dark">Disqualify staff status</button>
+          {% else %}
+            <button type="submit" class="btn btn-dark">Grant rights to staff</button>
+          {% endif %}
+        </form>
+      {% endif %}
+    </div>
+
+  </div>
+  <hr>
+  <div class="task-info">
+    {% if worker.is_staff %}
+      <p><strong>STAFF</strong></p>
+    {% endif %}
+    {% if worker.first_name %}
+      <p><strong>First name</strong> {{ worker.first_name }}</p>
+    {% endif %}
+    {% if worker.last_name %}
+      <p><strong>Last name</strong> {{ worker.last_name }}</p>
+    {% endif %}
+    <p><strong>Position:</strong> {{ worker.position }}</p>
+    <p><strong>Email:</strong> {{ worker.email }}</p>
+    <p><strong>Date joined:</strong> {{ worker.date_joined|date:"Y-m-d H:i" }}</p>
+    <p><strong>Last login:</strong> {{ worker.last_login|date:"Y-m-d H:i" }}</p>
+
+  </div>
+</div>
+{% endblock %}
